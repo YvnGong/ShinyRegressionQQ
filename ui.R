@@ -189,14 +189,24 @@ shinyUI(dashboardPage(skin = "blue",
                       
                       br(),
                       
-                      checkboxInput("checkboxPlot", label = "Edit Plot Title", value = FALSE),
+                      checkboxInput("checkboxQQ", label = "Edit Normal Q-Q Plot Title", value = FALSE),
                       conditionalPanel(
-                        condition = "input.checkboxPlot == true",
+                        condition = "input.checkboxQQ == true",
                         textInput(
                           inputId = "plot_title",
-                          label = "Plot title",
+                          label = "Title",
                           placeholder = "Enter text as plot title",
                           value = "Normal Q-Q Plot"
+                        )),
+                      
+                      checkboxInput("checkboxPop", label = "Edit Population Title", value = FALSE),
+                      conditionalPanel(
+                        condition = "input.checkboxPop == true",
+                        textInput(
+                          inputId = "pp_plot_title",
+                          label = "Title",
+                          placeholder = "Enter text as plot title",
+                          value = "Population Graph"
                         )),
                       
                       checkboxInput("checkboxComment", label = "Add Comment", value = FALSE),

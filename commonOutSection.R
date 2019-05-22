@@ -169,3 +169,12 @@
 
 #qqnorm((matrix[,1] - mean(matrix[,1]))/sd(matrix[,1]), col = rgb(99, 235, 235, maxColorValue = 255), cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
 #qqline((matrix[,1] - mean(matrix[,1]))/sd(matrix[,1]), col = "orange", lwd = 2)
+
+
+# output$plotleft2 <- renderPlot(
+#     matrix <- data1()
+#     if(input$leftpath == 1){
+#       qqline(matrix[,1], col = 2)
+#     }
+# 
+# )
