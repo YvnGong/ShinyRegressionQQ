@@ -3,6 +3,7 @@ library(shinyBS)
 library(plotrix)
 library("shinydashboard", lib.loc="/usr/lib64/R/library")
 
+#Skin Section
 shinyUI(dashboardPage(skin = "blue",
         dashboardHeader(title = "Quantile-Quantile Plot"),
         dashboardSidebar(
@@ -12,7 +13,8 @@ shinyUI(dashboardPage(skin = "blue",
             menuItem("Q-Q plot", tabName = "qqplots", icon = icon("wpexplorer"))
             )
           ),
-                      
+       
+        #Add style sheet               
         dashboardBody(
           tags$head( 
             tags$link(rel = "stylesheet",
@@ -73,6 +75,7 @@ shinyUI(dashboardPage(skin = "blue",
                   ),
                   sidebarLayout(
                     sidebarPanel(
+                      #Population Type Side bar part
                       selectInput("dist", "Population Type",
                                   list( 
                                     "Left-skewed" = "leftskewed",
@@ -82,8 +85,10 @@ shinyUI(dashboardPage(skin = "blue",
                                     "Normal" = "normal"), 
                                   selected = "leftskewed"
                       ),
+                     
                       br(),
-                      br(),
+                      
+                      #Skewness slider condition based on population type selections
                       conditionalPanel(
                         condition="input.dist=='leftskewed'",
                         sliderInput("leftskew", " Skewness:",min = 1, max = 10, value = 1, step= 0.1)
@@ -98,7 +103,6 @@ shinyUI(dashboardPage(skin = "blue",
                       ),
                       conditionalPanel(
                         condition="input.dist=='bimodal'",
-                        
                         sliderInput("prop","% under right mode:",min = 0, max = 1, value = 0.2)
                       ),
                       conditionalPanel(
@@ -106,6 +110,8 @@ shinyUI(dashboardPage(skin = "blue",
                         sliderInput("normmean", "Mean:", min = -5, max = 5, value = 0, step = 0.1),
                         sliderInput("normsd", "Standard Deviation:", min = 1, max = 5, value = 1, step = 0.1)
                       ),
+                      
+                      # #of path condition side bar section base on population type selection
                       conditionalPanel(
                         condition ="input.dist == 'leftskewed'", 
                         sliderInput("leftpath",
@@ -122,7 +128,6 @@ shinyUI(dashboardPage(skin = "blue",
                       ),
                       conditionalPanel(
                         condition = "input.dist == 'rightskewed'", 
-                        
                         # choose the number of sample means
                         sliderInput("rightpath",
                                     "# of paths",
@@ -136,10 +141,8 @@ shinyUI(dashboardPage(skin = "blue",
                                     max = 500,
                                     value = 100)
                       ),
-                      
                       conditionalPanel(
                         condition= "input.dist == 'symmetric'",
-                        
                         #choose the number of sample means
                         sliderInput("sympath",
                                     "# of paths",
@@ -152,11 +155,9 @@ shinyUI(dashboardPage(skin = "blue",
                                     min = 10,
                                     max = 500,
                                     value = 100)
-                        
                       ),
                       conditionalPanel(
                         condition= "input.dist == 'bimodal'",
-                        
                         #choose the number of sample means
                         sliderInput("bipath",
                                     "# of paths",
@@ -169,12 +170,9 @@ shinyUI(dashboardPage(skin = "blue",
                                     min = 10,
                                     max = 500,
                                     value = 100)
-                        
                       ),
-                      
                       conditionalPanel(
                         condition= "input.dist == 'normal'",
-                        
                         #choose the number of sample means
                         sliderInput("normpath",
                                     "# of paths",
@@ -187,16 +185,38 @@ shinyUI(dashboardPage(skin = "blue",
                                     min = 10,
                                     max = 500,
                                     value = 100)
-                      )
+                      ),
                       
-                    ),
-                    
-                    mainPanel(
+                      br(),
+                      
+                      checkboxInput("checkboxPlot", label = "Edit Plot Title", value = FALSE),
                       conditionalPanel(
-                        condition ="input.dist == 'leftskewed'", 
+                        condition = "input.checkboxPlot == true",
+                        textInput(
+                          inputId = "plot_title",
+                          label = "Plot title",
+                          placeholder = "Enter text as plot title",
+                          value = "Normal Q-Q Plot"
+                        )),
+                      
+                      checkboxInput("checkboxComment", label = "Add Comment", value = FALSE),
+                      conditionalPanel(
+                        condition = "input.checkboxComment == true",
+                        textAreaInput(
+                          inputId = "user_comment",
+                          label = "User Comment",
+                          placeholder = "Leave your comment here"
+                        ))
+                    ),
+
+                                 
+                    mainPanel(
+                      
+                      conditionalPanel(
+                        condition ="input.dist == 'leftskewed'",
                         plotOutput('plotleft2')),
                       conditionalPanel(
-                        condition = "input.dist == 'rightskewed'", 
+                        condition = "input.dist == 'rightskewed'",
                         plotOutput('plotright2')),
                       conditionalPanel(
                         condition= "input.dist == 'symmetric'",
@@ -211,7 +231,7 @@ shinyUI(dashboardPage(skin = "blue",
                       conditionalPanel(
                         condition ="input.dist == 'leftskewed'",
                         plotOutput('plotleft1')),
-                      
+
                       conditionalPanel(
                         condition = "input.dist == 'rightskewed'",
                         plotOutput('plotright1')),
@@ -223,7 +243,10 @@ shinyUI(dashboardPage(skin = "blue",
                         plotOutput('plotbiomodel1')),
                       conditionalPanel(
                         condition= "input.dist == 'normal'",
-                        plotOutput('plotnormal1'))
+                        plotOutput('plotnormal1')),
+                      #add comment box section
+                      br(),
+                      h4(textOutput("usercomment"))
                     )
                                   )
             )

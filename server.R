@@ -11,10 +11,14 @@ library(formattable)
 library(discrimARTs)
 library(truncnorm)
 library(EnvStats)
+library(tools)
 library("shinydashboard", lib.loc="/usr/lib64/R/library")
 
 
 shinyServer(function(input, output, session) {
+  output$usercomment <- 
+    renderText({input$user_comment})
+
   observeEvent(input$start, {
     updateTabItems(session, "tabs", "qqplots")
   })
@@ -67,12 +71,13 @@ shinyServer(function(input, output, session) {
     output$plotleft2 <- renderPlot({
       matrix <- data1()
       if(input$leftpath == 1){
-        qqPlot((matrix[,1] - mean(matrix[,1]))/sd(matrix[,1]), distribution="norm", param.list=list(mean=0, sd=1), 
-               points.col = rgb(99, 235, 235, maxColorValue = 255), line.col = "orange", plot.type = "Q-Q", 
-               qq.line.type="0-1", add.line=TRUE, cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5,
-               main = "Normal Q-Q Plot", ylab = "Standardized Sample Quantiles")
-        #qqnorm((matrix[,1] - mean(matrix[,1]))/sd(matrix[,1]), col = rgb(99, 235, 235, maxColorValue = 255), cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
-        #qqline((matrix[,1] - mean(matrix[,1]))/sd(matrix[,1]), col = "orange", lwd = 2)
+        qqPlot((matrix[,1] - mean(matrix[,1]))/sd(matrix[,1]), 
+               distribution="norm", param.list=list(mean=0, sd=1), 
+               points.col = rgb(99, 235, 235, maxColorValue = 255), 
+               line.col = "orange", plot.type = "Q-Q", 
+               qq.line.type="0-1", add.line=TRUE, cex.lab=1.5, 
+               cex.axis=1.5, cex.main=1.5, cex.sub=1.5, main = cbind(input$plot_title),
+               ylab = "Standardized Sample Quantiles")
       }
       else if (input$leftpath == 2){
         qqPlot((matrix[,1] - mean(matrix[,1]))/sd(matrix[,1]), distribution="norm", param.list=list(mean=0, sd=1), 
@@ -116,7 +121,7 @@ shinyServer(function(input, output, session) {
     # )
     
     
-    #Polplation of rightskewed
+    #Population of rightskewed
     output$plotright1<-renderPlot({
       curve(dgamma(x, shape = input$rightskew, beta = 1),
             main="Population Graph", col="orange", xlab="value", ylab="density",lwd = 5,
