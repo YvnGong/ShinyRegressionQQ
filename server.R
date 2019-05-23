@@ -1,5 +1,4 @@
 library(shiny)
-
 library(plotrix)
 library(ggplot2)
 library(reshape2)
@@ -13,7 +12,6 @@ library(truncnorm)
 library(EnvStats)
 library(tools)
 library("shinydashboard", lib.loc="/usr/lib64/R/library")
-
 
 shinyServer(function(input, output, session) {
   output$usercomment <- 

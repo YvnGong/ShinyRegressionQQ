@@ -189,34 +189,32 @@ shinyUI(dashboardPage(skin = "blue",
                       
                       br(),
                       
-                      checkboxInput("checkboxQQ", label = "Edit Normal Q-Q Plot Title", value = FALSE),
+                      checkboxInput("reportMode", "Report Mode"),
+                      
                       conditionalPanel(
-                        condition = "input.checkboxQQ == true",
+                        condition = "input.reportMode == true",
                         textInput(
                           inputId = "plot_title",
-                          label = "Title",
-                          placeholder = "Enter text as plot title",
+                          label = "Edit Normal Q-Q Plot Title",
                           value = "Normal Q-Q Plot"
                         )),
                       
-                      checkboxInput("checkboxPop", label = "Edit Population Title", value = FALSE),
                       conditionalPanel(
-                        condition = "input.checkboxPop == true",
+                        condition = "input.reportMode == true",
                         textInput(
                           inputId = "pp_plot_title",
-                          label = "Title",
-                          placeholder = "Enter text as plot title",
+                          label = "Edit Population Graph Title",
                           value = "Population Graph"
                         )),
                       
-                      checkboxInput("checkboxComment", label = "Add Comment", value = FALSE),
                       conditionalPanel(
-                        condition = "input.checkboxComment == true",
+                        condition = "input.reportMode == true",
                         textAreaInput(
                           inputId = "user_comment",
-                          label = "User Comment",
+                          label = "Add Comment",
                           placeholder = "Leave your comment here"
                         ))
+                      
                     ),
 
                                  
@@ -254,9 +252,15 @@ shinyUI(dashboardPage(skin = "blue",
                       conditionalPanel(
                         condition= "input.dist == 'normal'",
                         plotOutput('plotnormal1')),
+                      
                       #add comment box section
                       br(),
                       h4(textOutput("usercomment"))
+                      
+                      #generate the report
+                      # radioButtons('format', 'Document format', c('PDF', 'HTML', 'Word'),
+                      #              inline = TRUE),
+                      # downloadButton(outputId = "report", label = "Download the Report")
                     )
                                   )
             )
