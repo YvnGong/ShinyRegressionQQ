@@ -14,6 +14,27 @@ library(tools)
 library("shinydashboard", lib.loc="/usr/lib64/R/library")
 
 shinyServer(function(input, output, session) {
+
+##r locker test#######
+  # Initialize Learning Locker connection -- substitute with your own locker credentials
+  rlocker::connect(session, list(
+    endpoint = "http://localhost:8000/xapi/", 
+    auth = "Basic YWNjb3VudEBlbWFpbC5jb206c3VwZXJzZWNyZXRwYXNzd29yZA"
+  ))
+  
+  # Register events for inputs
+  
+  # Method 1 - sendCustomMessage (uses js)
+  observeEvent(input$submit, {
+    session$sendCustomMessage(type = 'create-statement', rlocker::createStatement())
+  })
+  
+  # Method 2 - createStatement and store (no js)
+  observeEvent(input$button, {
+    statement <- rlocker::createStatement()
+    rlocker::store(statment)
+  })
+##r locker test end###
   output$usercomment <- 
     renderText({input$user_comment})
 

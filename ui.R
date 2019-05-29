@@ -2,6 +2,7 @@ library(shiny)
 library(shinyBS)
 library(plotrix)
 library("shinydashboard", lib.loc="/usr/lib64/R/library")
+library(rlocker)
 
 #Skin Section
 shinyUI(dashboardPage(skin = "blue",
