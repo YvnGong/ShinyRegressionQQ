@@ -6,12 +6,18 @@ library(rlocker)
 
 #Skin Section
 shinyUI(dashboardPage(skin = "blue",
-        dashboardHeader(title = "Quantile-Quantile Plot"),
+        dashboardHeader(title = "Q-Q Plot",
+                        tags$li(class="dropdown",
+                                tags$a(href="https://shinyapps.science.psu.edu/",
+                                       icon("home", lib="font-awesome"))),
+                        # tags$li(class="dropdown",
+                        #         actionLink("info", icon("info"), class="myClass")),
+                        titleWidth = 200),
         dashboardSidebar(
           sidebarMenu(
             id="tabs",
             menuItem("Overview", tabName = "intro", icon = icon("dashboard")),
-            menuItem("Q-Q plot", tabName = "qqplots", icon = icon("wpexplorer"))
+            menuItem("Explore", tabName = "qqplots", icon = icon("wpexplorer"))
             )
           ),
        
@@ -23,6 +29,7 @@ shinyUI(dashboardPage(skin = "blue",
                       href = "feature.css"),
             tags$style(HTML('#start{background-color: #ffb6c1}')),
             tags$style(HTML('#start{border-color: #ffb6c1}')),
+            tags$style(HTML('#start{color: white}')),
             tags$style(HTML(".js-irs-0 .irs-single, .js-irs-0 .irs-bar-edge, .js-irs-0 .irs-bar {background: #ffb6c1}")),
             tags$style(HTML(".js-irs-1 .irs-single, .js-irs-1 .irs-bar-edge, .js-irs-1 .irs-bar {background: #ffb6c1}")),
             tags$style(HTML(".js-irs-2 .irs-single, .js-irs-2 .irs-bar-edge, .js-irs-2 .irs-bar {background: #ffb6c1}")),
@@ -64,16 +71,13 @@ shinyUI(dashboardPage(skin = "blue",
                   h4(""),
                   h4(tags$li("Play with it and have fun!")),
                   
-                  div(style = "text-align: center" ,bsButton("start", "G O !", size = "large", col = "#6dff66", icon = icon("bolt"))),
+                  div(style = "text-align: center; color: white" ,bsButton("start", "Explore", size = "large", icon = icon("bolt"), class="circle grow")),
                   br(),
                   h3(strong("Acknowledgements:")),
                   h4("This app was developed and coded by Jiajun Gao.")
                   ),
           #second tab item
           tabItem(tabName = "qqplots",
-                  div(style="display: inline-block;vertical-align:top;",
-                      tags$a(href='https://shinyapps.science.psu.edu/',tags$img(src='homebut.PNG', width = 15))
-                  ),
                   sidebarLayout(
                     sidebarPanel(
                       #Population Type Side bar part
