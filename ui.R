@@ -46,6 +46,22 @@ shinyUI(dashboardPage(skin = "blue",
             tags$style(HTML(".js-irs-13 .irs-single, .js-irs-13 .irs-bar-edge, .js-irs-13 .irs-bar {background: #ffb6c1}")),
             tags$style(HTML(".js-irs-14 .irs-single, .js-irs-14 .irs-bar-edge, .js-irs-14 .irs-bar {background: #ffb6c1}")),
             tags$style(HTML(".js-irs-15 .irs-single, .js-irs-15 .irs-bar-edge, .js-irs-15 .irs-bar {background: #ffb6c1}")),
+            tags$style(HTML(".js-irs-0 .irs-single, .js-irs-0 .irs-bar-edge, .js-irs-0 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-1 .irs-single, .js-irs-1 .irs-bar-edge, .js-irs-1 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-2 .irs-single, .js-irs-2 .irs-bar-edge, .js-irs-2 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-3 .irs-single, .js-irs-3 .irs-bar-edge, .js-irs-3 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-4 .irs-single, .js-irs-4 .irs-bar-edge, .js-irs-4 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-5 .irs-single, .js-irs-5 .irs-bar-edge, .js-irs-5 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-6 .irs-single, .js-irs-6 .irs-bar-edge, .js-irs-6 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-7 .irs-single, .js-irs-7 .irs-bar-edge, .js-irs-7 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-8 .irs-single, .js-irs-8 .irs-bar-edge, .js-irs-8 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-9 .irs-single, .js-irs-9 .irs-bar-edge, .js-irs-9 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-10 .irs-single, .js-irs-10 .irs-bar-edge, .js-irs-10 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-11 .irs-single, .js-irs-11 .irs-bar-edge, .js-irs-11 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-12 .irs-single, .js-irs-12 .irs-bar-edge, .js-irs-12 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-13 .irs-single, .js-irs-13 .irs-bar-edge, .js-irs-13 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-14 .irs-single, .js-irs-14 .irs-bar-edge, .js-irs-14 .irs-bar {border-color: #ffb6c1}")),
+            tags$style(HTML(".js-irs-15 .irs-single, .js-irs-15 .irs-bar-edge, .js-irs-15 .irs-bar {border-color: #ffb6c1}")),
             tags$style(HTML(".shiny-notification{height: 100px; width: 800px; 
                             position: fixed; top: calc(50%-50px);; left: calc(50%-400px);;}"))
             ),
@@ -67,14 +83,14 @@ shinyUI(dashboardPage(skin = "blue",
                   h4(tags$li("Move the slider to explore how sample size affects the normal q-q plot and see how this varies from sample to sample using the # of paths slider.")),
                   #h4("You can also look at the population density below the q-q plot."),
                   
-                  h4(tags$li("Click 'GO!' to start.")),
+                  # h4(tags$li("Click 'GO!' to start.")),
                   h4(""),
                   h4(tags$li("Play with it and have fun!")),
                   
                   div(style = "text-align: center; color: white" ,bsButton("start", "Explore", size = "large", icon = icon("bolt"), class="circle grow")),
                   br(),
                   h3(strong("Acknowledgements:")),
-                  h4("This app was developed and coded by Jiajun Gao.")
+                  h4("This app was developed and coded by Jiajun Gao, and updated by Yiyun Gong.")
                   ),
           #second tab item
           tabItem(tabName = "qqplots",
@@ -227,22 +243,6 @@ shinyUI(dashboardPage(skin = "blue",
                       
                       conditionalPanel(
                         condition ="input.dist == 'leftskewed'",
-                        plotOutput('plotleft2')),
-                      conditionalPanel(
-                        condition = "input.dist == 'rightskewed'",
-                        plotOutput('plotright2')),
-                      conditionalPanel(
-                        condition= "input.dist == 'symmetric'",
-                        plotOutput('plotsymmetric2')),
-                      conditionalPanel(
-                        condition= "input.dist == 'bimodal'",
-                        plotOutput('plotbiomodel2')),
-                      conditionalPanel(
-                        condition= "input.dist == 'normal'",
-                        plotOutput('plotnormal2')),
-                      br(),
-                      conditionalPanel(
-                        condition ="input.dist == 'leftskewed'",
                         plotOutput('plotleft1')),
 
                       conditionalPanel(
@@ -257,6 +257,22 @@ shinyUI(dashboardPage(skin = "blue",
                       conditionalPanel(
                         condition= "input.dist == 'normal'",
                         plotOutput('plotnormal1')),
+                      br(),
+                      conditionalPanel(
+                        condition ="input.dist == 'leftskewed'",
+                        plotOutput('plotleft2')),
+                      conditionalPanel(
+                        condition = "input.dist == 'rightskewed'",
+                        plotOutput('plotright2')),
+                      conditionalPanel(
+                        condition= "input.dist == 'symmetric'",
+                        plotOutput('plotsymmetric2')),
+                      conditionalPanel(
+                        condition= "input.dist == 'bimodal'",
+                        plotOutput('plotbiomodel2')),
+                      conditionalPanel(
+                        condition= "input.dist == 'normal'",
+                        plotOutput('plotnormal2')),
                       
                       #add comment box section
                       br(),
