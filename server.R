@@ -15,27 +15,28 @@ library("shinydashboard", lib.loc="/usr/lib64/R/library")
 
 shinyServer(function(input, output, session) {
 
-##r locker test#######
-  # Initialize Learning Locker connection -- substitute with your own locker credentials
-  connection <- rlocker::connect(session, list(
-    base_url = "https://learning-locker.stat.vmhost.psu.edu/",
-    auth = "Basic ZDQ2OTNhZWZhN2Q0ODRhYTU4OTFmOTlhNWE1YzBkMjQxMjFmMGZiZjo4N2IwYzc3Mjc1MzU3MWZkMzc1ZDliY2YzOTNjMGZiNzcxOThiYWU2",
-    agent = rlocker::createAgent()
-  ))
+# ##r locker test#######
+#   # Initialize Learning Locker connection -- substitute with your own locker credentials
+#   connection <- rlocker::connect(session, list(
+#     base_url = "https://learning-locker.stat.vmhost.psu.edu/",
+#     auth = "Basic ZDQ2OTNhZWZhN2Q0ODRhYTU4OTFmOTlhNWE1YzBkMjQxMjFmMGZiZjo4N2IwYzc3Mjc1MzU3MWZkMzc1ZDliY2YzOTNjMGZiNzcxOThiYWU2",
+#     agent = rlocker::createAgent()
+#   ))
+#   
+#   # Register events for inputs
+#   
+#   # Method 1 - sendCustomMessage (uses js)
+#   observeEvent(input$submit, {
+#     session$sendCustomMessage(type = 'create-statement', rlocker::createStatement())
+#   })
+#   
+#   # Method 2 - createStatement and store (no js)
+#   observeEvent(input$button, {
+#     statement <- rlocker::createStatement()
+#     rlocker::store(statment)
+#   })
+# ##r locker test end###
   
-  # Register events for inputs
-  
-  # Method 1 - sendCustomMessage (uses js)
-  observeEvent(input$submit, {
-    session$sendCustomMessage(type = 'create-statement', rlocker::createStatement())
-  })
-  
-  # Method 2 - createStatement and store (no js)
-  observeEvent(input$button, {
-    statement <- rlocker::createStatement()
-    rlocker::store(statment)
-  })
-##r locker test end###
   output$usercomment <- 
     renderText({input$user_comment})
 

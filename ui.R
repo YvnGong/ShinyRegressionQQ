@@ -2,7 +2,10 @@ library(shiny)
 library(shinyBS)
 library(plotrix)
 library("shinydashboard", lib.loc="/usr/lib64/R/library")
+library(dplyr)
+library(shinycssloaders)
 library(rlocker)
+
 
 #Skin Section
 shinyUI(dashboardPage(skin = "blue",
@@ -94,6 +97,10 @@ shinyUI(dashboardPage(skin = "blue",
                   ),
           #second tab item
           tabItem(tabName = "qqplots",
+                  h3(strong("Quantile-Quantile Plot")),
+                  h4(tags$li("Move the sliders to explore how sample size affects the normal q-q plot and see how this varies from sample to sample.")),
+                  h4(tags$li("Use the report mode to edit the title of plots and add comments.")),
+                  br(),
                   sidebarLayout(
                     sidebarPanel(
                       #Population Type Side bar part
@@ -243,36 +250,36 @@ shinyUI(dashboardPage(skin = "blue",
                       
                       conditionalPanel(
                         condition ="input.dist == 'leftskewed'",
-                        plotOutput('plotleft1')),
+                        plotOutput('plotleft1',width = "100%", height = "350px")%>% withSpinner(color="#ffb6c1")),
 
                       conditionalPanel(
                         condition = "input.dist == 'rightskewed'",
-                        plotOutput('plotright1')),
+                        plotOutput('plotright1',width = "100%", height = "350px")%>% withSpinner(color="#ffb6c1")),
                       conditionalPanel(
                         condition= "input.dist == 'symmetric'",
-                        plotOutput('plotsymmetric1')),
+                        plotOutput('plotsymmetric1',width = "100%", height = "350px")%>% withSpinner(color="#ffb6c1")),
                       conditionalPanel(
                         condition= "input.dist == 'bimodal'",
-                        plotOutput('plotbiomodel1')),
+                        plotOutput('plotbiomodel1',width = "100%", height = "350px")%>% withSpinner(color="#ffb6c1")),
                       conditionalPanel(
                         condition= "input.dist == 'normal'",
-                        plotOutput('plotnormal1')),
+                        plotOutput('plotnormal1',width = "100%", height = "350px")%>% withSpinner(color="#ffb6c1")),
                       br(),
                       conditionalPanel(
                         condition ="input.dist == 'leftskewed'",
-                        plotOutput('plotleft2')),
+                        plotOutput('plotleft2',width = "100%", height = "350px")%>% withSpinner(color="#ffb6c1")),
                       conditionalPanel(
                         condition = "input.dist == 'rightskewed'",
-                        plotOutput('plotright2')),
+                        plotOutput('plotright2',width = "100%", height = "350px")%>% withSpinner(color="#ffb6c1")),
                       conditionalPanel(
                         condition= "input.dist == 'symmetric'",
-                        plotOutput('plotsymmetric2')),
+                        plotOutput('plotsymmetric2',width = "100%", height = "350px")%>% withSpinner(color="#ffb6c1")),
                       conditionalPanel(
                         condition= "input.dist == 'bimodal'",
-                        plotOutput('plotbiomodel2')),
+                        plotOutput('plotbiomodel2',width = "100%", height = "350px")%>% withSpinner(color="#ffb6c1")),
                       conditionalPanel(
                         condition= "input.dist == 'normal'",
-                        plotOutput('plotnormal2')),
+                        plotOutput('plotnormal2',width = "100%", height = "350px")%>% withSpinner(color="#ffb6c1")),
                       
                       #add comment box section
                       br(),
